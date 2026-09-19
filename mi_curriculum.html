@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javier Gonzalez Rodriguez</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --titulo: #1C1C1E;
+            --background-secundario: #4A4A46;
+            --background-principal: #FBFAF7;
+            --item-lista: #FFFFFF;
+            --separador: #E4E1D8;
+            --puesto: #0E5F52;
+            --color-stack: #E8F1FF;
+            --numeracion: #C98A2C;
+            --general-font-family: "Source Serif 4", serif;
+            --ibm-font-family: "IBM Plex Mono", monospace;
+        }
+        @media(prefers-color-scheme: dark){
+            :root:not([data-theme="light"]){
+                --titulo: #EDEBE4;
+                --background-secundario: #B7B3A8;
+                --background-principal: #16171A;
+                --item-lista: #1D1E21;
+                --separador: #33342F;
+                --puesto: #5FBBAA;
+                --color-stack: #1B2C28;
+                --numeracion: #E0AE5C;
+                --general-font-family: "Source Serif 4", serif;
+                --ibm-font-family: "IBM Plex Mono", monospace;
+            }
+        }
+
+        :root[data-theme="dark"]{
+            --titulo: #EDEBE4;
+            --background-secundario: #B7B3A8;
+            --background-principal: #16171A;
+            --item-lista: #1D1E21;
+            --separador: #33342F;
+            --puesto: #5FBFAA;
+            --color-stack: #1B2C28;
+            --numeracion: #E0AE5C;
+            --general-font-family: "Source Serif 4", serif;
+            --ibm-font-family: "IBM Plex Mono", monospace;
+        }
+
+        body{
+            margin: 0;
+            background-color: var(--background-principal);
+            color: var(--titulo);
+            font-family: "IBM Plex Sans", system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .cv-container{
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 56px 40px 80px;
+        }
+
+        .header-container{
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 28px;
+            align-items: start;
+            padding-bottom: 32px;
+            border-bottom: 2px solid var(--titulo);
+        }
+
+        .header-container .logo{
+            width: 64px;
+            height: 64px;
+            border: 1.5px solid var(--titulo);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--general-font-family);
+            font-size: 26px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .header-container .nombre-tit{
+            font-family: var(--general-font-family);
+            font-weight: 700;
+            font-size: clamp(28px, 4vw, 38px);
+            line-height: 1.1;
+            margin: 0 0 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .header-container .rol{
+            font-family: var(--general-font-family);
+            font-size: 13px;
+            letter-spacing: 0.06em;
+            color: var(--puesto);
+            margin: 0;
+        }
+
+        .header-container .rol::before{
+            content: "// ";
+            color: var(--puesto);
+        }
+
+        .segment-content{
+            padding: 34px 0;
+            border-bottom: 1px solid var(--separador);
+        }
+
+        .segment-content:last-child{
+            border-bottom: none;
+        }
+
+        .segment-content .head{
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .segment-content .contact-list{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .segment-content .contact-item{
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border: 1px solid var(--separador);
+            border-radius: 4px;
+            background: var(--item-lista);
+            color: var(--titulo);
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .segment-content .contact-item svg{
+            width: 15px;
+            height: 15px;
+            stroke: var(--puesto);
+            flex-shrink: 0;
+        }
+        .segment-content a.contact-item{
+            transition: border-color .15s ease, background .15s ease;
+        }
+        .segment-content a.contact-item:hover{
+            border-color: var(--puesto);
+            background: var(--color-stack);
+        }
+
+        .segment-content .num{
+            font-family: var(--ibm-font-family);
+            font-size: 12px;
+            color: var(--numeracion);
+        }
+
+        .segment-content h2{
+            font-family: var(--general-font-family);
+            font-weight: 600;
+            font-size: 21px;
+            margin: 0;
+            color: var(--titulo);
+        }
+
+        .segment-content p.parrafo{
+            margin: 0;
+            max-width: 64ch;
+            font-size: 15.5px;
+            line-height: 1.7;
+            color: var(--background-secundario);
+        }
+
+        .segment-content .edu-list{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .segment-content .edu-item{
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px 16px;
+            align-items: baseline;
+            border-left: 2px solid var(--puesto);
+            padding-left: 16px;
+        }
+
+        .segment-content .edu-title{
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--titulo);
+        }
+
+        .segment-content .edu-school{
+            grid-column: 1;
+            font-size: 13.5px;
+            color: var(--background-secundario);
+        }
+
+        .segment-content .edu-dates{
+            grid-column: 2;
+            grid-row: 1/ span 2;
+            align-self: center;
+            font-family: var(--ibm-font-family);
+            white-space: nowrap;
+        }
+
+        .segment-content .stack-group{
+            margin-top: 22px;
+        }
+
+        .segment-content .stack-group .etiqueta{
+            font-family: var(--ibm-font-family);
+            font-size: 11.5px;
+            letter-spacing: 0.08em;
+            color: var(--background-secundario);
+            margin: 0 0 10px;
+        }
+
+        .segment-content .stack-group .tecnologias{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .segment-content .stack-group .tecnologias .tecnologia{
+            font-family: var(--ibm-font-family);
+            font-size: 12.5px;
+            padding: 5px 10px;
+            border: 1px solid var(--separador);
+            border-radius: 4px;
+            border-color: var(--puesto);
+            background: var(--color-stack);
+            color: var(--puesto);
+        }
+
+
+        @media(max-width: 520px){
+            .edu-item{
+                grid-row: auto;
+            }
+
+            .edu-dates{
+                grid-template-columns: 1fr;
+            }
+
+            .header-container{
+                grid-template-columns: 1fr;
+            }
+
+            .cv-container{
+                padding: 36px 20px 60px;
+            }
+
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <div class="header-container">
+            <div class="logo">JG</div>
+            <div>
+                <p class="nombre-tit">JAVIER GONZALEZ RODRIGUEZ</p>
+                <p class="rol">Desarrollador full satck</p>
+            </div>
+        </div>
+
+        <div class="segment-content">
+            <div class="head">
+                <span class="num">00</span>
+                <h2>Contacto</h2>
+            </div>
+
+            <div class="contact-list">
+                <a class="contact-item" href="mailto:javiergr1234@gmail.com">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/>
+                    </svg>
+                    javiergr1234@gmail.com
+                </a>
+                <a class="contact-item" href="tel:+34665317309">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3.5 4.5c.5 5 2.7 9.4 6 12.5s7.5 5.5 12.5 6l.5-4-5-2-2 2c-2.3-1.3-4.2-3.2-5.5-5.5l2-2-2-5z"/>
+                    </svg>
+                    +34 665 317 309
+                </a>
+                <a class="contact-item" href="https://www.linkedin.com/in/javier-gonzález-rodríguez-625752223/" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <path d="M7 10v7M7 7v.01M12 17v-4.5c0-1.4 1-2.5 2.3-2.5S17 11.1 17 12.5V17"/>
+                    </svg>
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+
+        <div class="segment-content">
+            <div class="head">
+                <span class="num">01</span>
+                <h2>Perfil profesional</h2>
+            </div>
+
+            <p class="parrafo">
+                Como ingeniero informático y experto en desarrollo web, he participado en diferentes proyectos trabajando con diversas tecnologías y desempeñando funciones
+                de cara al cliente. Mi experiencia incluye el análisis y la recogida de requisitos, asi como su posterior implementación en el producto final. <br><br>
+                Esta experiencia me ha permitido desarrollar una gran capacidad de adaptación a diferentes tecnologías, proyectos y siguaciones dentro de los entornos de trabajo.
+                Además, cuento con criterio para definir y estructurar soluciones qeu se ajusten a las necesidades reales del cliente. <br><br>
+                Estoy acostumbrado a trabajar en equipo, liderando  y apoyando a mis compañeros cuando es necesario, con el objetivo de garantizar la satisfacción del cliente como la calidad
+                del producto desarrollado. Presto especial atención a la optimización la robustez y la calidad de los sistemas que construyo.
+            </p>
+        </div>
+
+        <div class="segment-content">
+            <div class="head">
+                <span class="num">02</span>
+                <h2>Formación</h2>
+            </div>
+            <ul class="edu-list">
+                <li class="edu-item">
+                    <span class="edu-title">INGENIERÍA INFORMÁTICA</span>
+                    <span class="edu-dates">SEPTIEMBRE 2019 - JUNIO 2023</span>
+                    <span class="edu-school">UNIVERSIDAD DE MÁLAGA</span>
+                </li>
+
+                
+                <li class="edu-item">
+                    <span class="edu-title">DESARROLLADOR MULTIPLATAFORMA (DAM)</span>
+                    <span class="edu-dates">SEPTIEMBRE 2017 - JUNIO 2019</span>
+                    <span class="edu-school">PONIENTE FORMACIÓN</span>
+                </li>
+
+                
+                <li class="edu-item">
+                    <span class="edu-title">SISTEMAS MICROINFORMÁTICOS Y REDES</span>
+                    <span class="edu-dates">SEPTIEMBRE 2015 - JUNIO 2017</span>
+                    <span class="edu-school">PONIENTE FORMACIÓN</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="segment-content">
+            <div class="head">
+                <span class="num">03</span>
+                <h2>Stack tecnológico</h2>
+            </div>
+
+            <div class="stack-group">
+                <p class="stack-label">
+                    Frontend
+                </p>
+                <div class="tecnologias">
+                    <span class="tecnologia">
+                        Vue.js
+                    </span>
+                    <span class="tecnologia">
+                        HTML5
+                    </span>
+                    <span class="tecnologia">
+                        CSS3
+                    </span>
+                    <span class="tecnologia">
+                        Boostrap
+                    </span>
+                    <span class="tecnologia">
+                        JavaScript
+                    </span>
+                    <span class="tecnologia">
+                        TypeScript
+                    </span>
+                    <span class="tecnologia">
+                        React
+                    </span>
+                </div>
+
+                <p class="stack-label">
+                    Backend
+                </p>
+                <div class="tecnologias">
+                    <div class="tecnologia">
+                        Laravel
+                    </div>
+                    <div class="tecnologia">
+                        PHP
+                    </div>
+                    <div class="tecnologia">
+                        Node.js
+                    </div>
+                    <div class="tecnologia">
+                        Java
+                    </div>
+                    <div class="tecnologia">
+                        Spring Boot
+                    </div>
+                </div>
+
+                <p class="stack-label">
+                    Bases de datos
+                </p>
+                <div class="tecnologias">
+                    <div class="tecnologia">
+                        MySQL
+                    </div>
+                    <div class="tecnologia">
+                        MariaDB
+                    </div>
+                    <div class="tecnologia">
+                        PostgreSQL
+                    </div>
+                    <div class="tecnologia">
+                        SQLite
+                    </div>
+                    <div class="tecnologia">
+                        SQL Server
+                    </div>
+                </div>
+
+                <p class="stack-label">
+                    DevOps y herramientas
+                </p>
+                <div class="tecnologias">
+                    <div class="tecnologia">
+                        Git
+                    </div>
+                    <div class="tecnologia">
+                        GitHub
+                    </div>
+                    <div class="tecnologia">
+                        GitLab
+                    </div>
+                    <div class="tecnologia">
+                        Docker
+                    </div>
+                </div>
+
+                <p class="stack-label">
+                    Arquitectura y metodologías
+                </p>
+                <div class="tecnologias">
+                    <div class="tecnologia">
+                        API REST
+                    </div>
+                    <div class="tecnologia">
+                        WebSockets
+                    </div>
+                    <div class="tecnologia">
+                        MVC
+                    </div>
+                    <div class="tecnologia">
+                        Scrum
+                    </div>
+                    <div class="tecnologia">
+                        Metodología ágil
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="segment-content">
+            <div class="head">
+                <span class="num">04</span>
+                <h2>Experiencia laboral</h2>
+            </div>
+
+            <ul class="edu-list">
+                <li class="edu-item">
+                    <span class="edu-title">Empresa: IBlevel/Auctibid</span>
+                    <span class="edu-dates">Febrero 2024 - Julio 2025</span>
+                </li>
+                
+                <li class="edu-item">
+                    <span class="edu-title">Puesto: Desarrollador full stack</span>
+                </li>
+
+            </ul>
+            <br>
+            <p class="parrafo">
+                En este puesto lideré el desarrollo de una plataforma de subastas online, trabajando directamente con el cliente para analizar y recopliar los
+                requisitos del sistema, optimizando procesos, refactorizando código obsoleto e implementando las nuevas funcionalidades que solicitaba el cliente
+                según el desarrollo avanzaba entre otras cosas todo para poder lanzar el producto al mercado.<br><br>
+                Entre uno de los retos más imprtantes que pude realizar cabe destacar la migración completa del proyecto de Laravel 4.2 a la ultima versión Laravel 11.
+            </p>
+            <br>
+            
+            <div class="stack-group">
+                <p class="stack-label">Tecnologías utilizadas</p>
+                <div class="tecnologias">
+                    <div class="tecnologia">
+                        Laravel
+                    </div>
+                    <div class="tecnologia">
+                        PHP
+                    </div>
+                    <div class="tecnologia">
+                        Vue
+                    </div>
+                    <div class="tecnologia">
+                        HTML
+                    </div>
+                    <div class="tecnologia">
+                        CSS
+                    </div>
+                    <div class="tecnologia">
+                        Stripe
+                    </div>
+                    <div class="tecnologia">
+                        Git/GitHub
+                    </div>
+                    <div class="tecnologia">
+                        Boostrap
+                    </div>
+                    <div class="tecnologia">
+                        Node.js
+                    </div>
+                    <div class="tecnologia">
+                        Laragon
+                    </div>
+                    <div class="tecnologia">
+                        Certificados SSH
+                    </div>
+                    <div class="tecnologia">
+                        WebSockets
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="segment-content">
+            <ul class="edu-list">
+                <li class="edu-item">
+                    <span class="edu-title">Empresa: AiFile</span>
+                    <span class="edu-dates">2019 - 2020</span>
+                </li>
+                
+                <li class="edu-item">
+                    <span class="edu-title">Puesto: Desarrollador front-end</span>
+                </li>
+
+            </ul>
+            <br>
+            <p class="parrafo">
+                Desarrollé diferentes proyectos utilizando FileMaker, creando sistemas de gestión empresarial adaptados a las necesidades específicas de cada cliente. <br><br>
+                Mantuve una comunicación directa y periódica con los clientes mediante reuniones remotas, realizando el seguimiento de los proyectos y verificando que 
+                las soluciones desarrolladas respondieran a sus necesidades. <br><br>
+                Además, participé activamente en la mejora y evolución de los sistemas, proponiendo alternativas funcionales, mejoras y nuevas formas de automatizar 
+                procesos con el objetivo de optimizar la gestión y eficiencia de los negocios de los clientes. <br>
+            </p>
+            <br>
+            
+            <div class="stack-group">
+                <p class="stack-label">Tecnologías utilizadas</p>
+                <div class="tecnologias">
+                    <div class="tecnologia">
+                        FileMaker Pro
+                    </div>
+                    <div class="tecnologia">
+                        Layouts
+                    </div>
+                    <div class="tecnologia">
+                        FileMaker Script Engine
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="segment-content">
+            <div class="head">
+                <span class="num">05</span>
+                <h2>Otros proyectos</h2>
+            </div>
+
+            <ul class="edu-list">
+                <li class="edu-item">
+                    <span class="edu-title">CriptorPs</span>
+                    <span class="edu-dates">2025 - 2026</span>
+                    <span class="edu-school">Gestor seguro de contraseñas</span>
+                </li>
+            </ul>
+            <br>
+
+            <p class="parrafo">
+                Desarrollé una aplicación de escritorio usando "Electron" cuyo proposito fue el mantener contraseñas encriptadas en el sistema de forma segura
+                utilizando cifrados de contraseñas con diferentes niveles de seguridad.
+            </p>
+
+            <div class="stack-group">
+                <p class="stack-label">Tecnologías utilizadas</p>
+                <div class="tecnologias">
+                    <div class="tecnologia">
+                        Electron
+                    </div>
+                    <div class="tecnologia">
+                        Vue
+                    </div>
+                    <div class="tecnologia">
+                        Node
+                    </div>
+                    <div class="tecnologia">
+                        JavaScript
+                    </div>
+                    <div class="tecnologia">
+                        HTML
+                    </div>
+                    <div class="tecnologia">
+                        CSS
+                    </div>
+                    <div class="tecnologia">
+                        Crypto.js
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="segment-content">
+            <ul class="edu-list">
+                <li class="edu-item">
+                    <span class="edu-title">GitSyncronizer</span>
+                    <span class="edu-dates">2023 - 2024</span>
+                    <span class="edu-school">Sistema colaborativo de sincronización de código</span>
+                </li>
+            </ul>
+            <br>
+
+            <p class="parrafo">
+                Proyecto desarrollado para facilitar la colaboración en tiempo real entre programadores sin necesidad de conocimientos avanzados de Git.<br><br>
+
+                El sistema permitía mantener código fuente centralizado en un servidor comparitdo y sincronizar los cambios mediante sockets, minimizando los conflictos
+                de versiones y simplificando el trabajo colaborativo viendo los cambio en tiempo real por todas las partes implicadas.
+            </p>
+
+            <div class="stack-group">
+                <p class="stack-label">Tecnologías utilizadas</p>
+                <div class="tecnologias">
+                    <div class="tecnologia">
+                        java
+                    </div>
+                    <div class="tecnologia">
+                        Sockets
+                    </div>
+                    <div class="tecnologia">
+                        Sistemas distribuidos
+                    </div>
+                    <div class="tecnologia">
+                        Gestión de archivos
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
